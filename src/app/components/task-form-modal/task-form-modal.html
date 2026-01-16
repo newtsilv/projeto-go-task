@@ -1,8 +1,8 @@
 <form action="" class="rounded-xl overflow-hidden bg-white">
   <div class="flex gap-1 items-center p-4">
     <img src="images/icon-new-task.svg" alt="" />
-    <h1 class="font-semibold text-lg">Criar/editar tarefa</h1>
-    <img class="ml-auto cursor-pointer" src="images/icon-close.svg" alt="" />
+    <h1 class="font-semibold text-lg">{{ _data.mode === 'create' ? 'Criar' : 'Editar'}} tarefa</h1>
+    <img (click)="closeModal()" class="ml-auto cursor-pointer" src="images/icon-close.svg" alt="" />
   </div>
   <div class="p-4 border-y border-[#d1d5dd] flex flex-col gap-4">
     <div>
@@ -29,7 +29,7 @@
     </div>
   </div>
   <div class="p-4 flex justify-end gap-2">
-    <button
+    <button (click)="closeModal()"
       class="py-3 px-4 bg-[#fafafa] rounded-xl text-sm font-semibold cursor-pointer active:translate-y-1 transition-transform duration-75"
       type="button"
     >
@@ -39,7 +39,7 @@
       class="py-3 px-4 bg-[#2a89ef] text-white rounded-xl text-sm font-semibold cursor-pointer active:translate-y-1 transition-transform duration-75 shadow-md shadow-blue-500/50 "
       type="submit"
     >
-      Criar uma tarefa
+      {{ _data.mode === 'create' ? 'Criar uma tarefa' : 'Salvar alterações'}}
     </button>
   </div>
 </form>

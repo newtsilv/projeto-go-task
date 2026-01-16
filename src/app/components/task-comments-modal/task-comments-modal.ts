@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { modalControllerService } from '../../services/modal-controller.service';
 
 @Component({
   selector: 'app-task-comments-modal',
@@ -7,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './task-comments-modal.css',
 })
 export class TaskCommentsModal {
-
+  private readonly _modalControllerService = inject(modalControllerService)
+  closeModal() {
+    this._modalControllerService.closeTaskCommentsModal()
+  }
 }
