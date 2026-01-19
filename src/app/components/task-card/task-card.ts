@@ -13,7 +13,7 @@ export class TaskCard {
     this._modalControllerService.openTaskCommentsModal();
   }
   openEditModal() {
-    this._modalControllerService.openEditTaksModal();
+    this._modalControllerService.openEditTaksModal({name: 'Nome Tarefa', description: 'Descrição da Tarefa'});
   }
 
 }

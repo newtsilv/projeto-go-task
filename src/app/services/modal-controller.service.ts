@@ -3,6 +3,8 @@ import { Dialog } from '@angular/cdk/dialog';
 import { TaskFormModal } from '../components/task-form-modal/task-form-modal';
 import { TaskCommentsModal } from '../components/task-comments-modal/task-comments-modal';
 
+import { ITaskFormControls } from '../interfaces/task-form-controls.interface';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -22,11 +24,12 @@ export class modalControllerService {
     });
   }
 
-  openEditTaksModal() {
+  openEditTaksModal(formValues: ITaskFormControls) {
     return this._dialog.open<string>(TaskFormModal, {
       ...this.modalSizeOptions,
       data: {
         mode: 'edit',
+        formValues,
       },
     });
   }
