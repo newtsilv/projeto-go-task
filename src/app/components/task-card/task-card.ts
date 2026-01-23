@@ -13,7 +13,12 @@ export class TaskCard {
     this._modalControllerService.openTaskCommentsModal();
   }
   openEditModal() {
-    this._modalControllerService.openEditTaksModal({name: 'Nome Tarefa', description: 'Descrição da Tarefa'});
+   const dialogRef = this._modalControllerService.openEditTaksModal({
+      name: 'Nome Tarefa',
+      description: 'Descrição da Tarefa',
+    });
+    dialogRef.closed.subscribe((taskForm) => {
+      console.log('Tarefa Editada:', taskForm);
+    })
   }
-
 }

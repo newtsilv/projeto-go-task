@@ -11,6 +11,9 @@ import { modalControllerService } from '../../services/modal-controller.service'
 export class WelcomeSection {
   private readonly _modalControllerService = inject(modalControllerService);
   openModal() {
-    this._modalControllerService.openNewTaksModal();
+    const dialogRef = this._modalControllerService.openNewTaksModal();
+    dialogRef.closed.subscribe((taskForm) => {
+      console.log('Tarefa Criada:', taskForm);
+    })
   }
 }
