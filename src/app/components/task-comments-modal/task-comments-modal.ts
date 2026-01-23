@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { modalControllerService } from '../../services/modal-controller.service';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-task-comments-modal',
@@ -9,7 +10,8 @@ import { modalControllerService } from '../../services/modal-controller.service'
 })
 export class TaskCommentsModal {
   private readonly _modalControllerService = inject(modalControllerService)
+  readonly _dialogRef = inject(DialogRef);
   closeModal() {
-    this._modalControllerService.closeTaskCommentsModal()
+    this._dialogRef.close();
   }
 }

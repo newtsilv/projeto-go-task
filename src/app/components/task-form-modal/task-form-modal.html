@@ -48,6 +48,7 @@
       Cancelar
     </button>
     <button
+      (click)="closeModal(taskForm.value)"
       class="{{
         `py-3 px-4 rounded-xl text-white text-sm font-semibold cursor-pointer ${
           taskForm.invalid

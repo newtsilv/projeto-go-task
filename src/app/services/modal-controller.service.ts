@@ -16,17 +16,23 @@ export class modalControllerService {
   private readonly _dialog = inject(Dialog);
 
   openNewTaksModal() {
-    return this._dialog.open<string>(TaskFormModal, {
+    return this._dialog.open<ITaskFormControls>(TaskFormModal, {
       ...this.modalSizeOptions,
+      disableClose: true,
       data: {
         mode: 'create',
+        formValues: {
+          name: '',
+          description: '',
+        }
       },
     });
   }
 
   openEditTaksModal(formValues: ITaskFormControls) {
-    return this._dialog.open<string>(TaskFormModal, {
+    return this._dialog.open<ITaskFormControls>(TaskFormModal, {
       ...this.modalSizeOptions,
+      disableClose: true,
       data: {
         mode: 'edit',
         formValues,
@@ -38,8 +44,5 @@ export class modalControllerService {
     return this._dialog.open<string>(TaskCommentsModal, {
       ...this.modalSizeOptions,
     });
-  }
-  closeTaskCommentsModal() {
-    this._dialog.closeAll();
   }
 }

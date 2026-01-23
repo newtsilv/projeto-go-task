@@ -1,8 +1,9 @@
-import { DIALOG_DATA } from '@angular/cdk/dialog';
+import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Component, inject } from '@angular/core';
 import { modalControllerService } from '../../services/modal-controller.service';
 import { ITaskFormModalData } from '../../interfaces/task-form-modal-data.interface';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ITaskFormControls } from '../../interfaces/task-form-controls.interface';
 
 @Component({
   selector: 'app-task-form-modal',
@@ -13,6 +14,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class TaskFormModal {
   readonly _data: ITaskFormModalData = inject(DIALOG_DATA);
   private readonly _modalControllerService = inject(modalControllerService);
+  readonly _dialogRef = inject(DialogRef);
 
   taskForm: FormGroup = new FormGroup({
     name: new FormControl(this._data.formValues?.name, [
@@ -26,11 +28,11 @@ export class TaskFormModal {
   });
 
   onFormSubmit() {
-
+    console.log(this.taskForm.value);
   }
 
-  closeModal() {
-    this._modalControllerService.closeTaskCommentsModal();
+  closeModal(formValues: ITaskFormControls | undefined = undefined) {
+    this._dialogRef.close(formValues);
   }
 
 }
