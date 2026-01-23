@@ -5,6 +5,6 @@ export interface ITask {
   id: string;
   name: string;
   description: string;
-  coments: IComment[];
+  comments: IComment[];
   status: TaskStatus;
 }
