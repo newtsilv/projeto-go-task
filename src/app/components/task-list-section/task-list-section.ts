@@ -3,13 +3,13 @@ import { TaskCard } from '../task-card/task-card';
 import { TaskService } from '../../services/task.service';
 import { CdkDropList, CdkDrag, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ITask } from '../../interfaces/task.interface';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { TaskStatus } from '../../types/task-status';
 import { TaskStatusEnum } from '../../enums/task-status.enum';
 
 @Component({
   selector: 'app-task-list-section',
-  imports: [TaskCard, CdkDropList, CdkDrag, AsyncPipe],
+  imports: [TaskCard, CdkDropList, CdkDrag, AsyncPipe, JsonPipe],
   templateUrl: './task-list-section.html',
   styleUrl: './task-list-section.css',
 })
@@ -42,6 +42,7 @@ export class TaskListSection {
       default:
         throw new Error('Coluna desconhecida');
     }
+    this._taskService.updateTaskStatus(taskId, taskCurrentStatus, taskNextStatus)
   }
 
   private moveCardToColumn(event: CdkDragDrop<ITask[]>) {
