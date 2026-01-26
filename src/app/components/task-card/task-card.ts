@@ -16,11 +16,14 @@ export class TaskCard {
   private readonly _taskService = inject(TaskService)
 
   openModal() {
-    this.task.comments = [
-      {id: '123', description: 'meu comentário 1'},
-      {id: '456', description: 'meu comentário 2'},
-    ]
-    this._modalControllerService.openTaskCommentsModal(this.task);
+    const dialogRef = this._modalControllerService.openTaskCommentsModal(this.task);
+
+    dialogRef.closed.subscribe((taskCommentsChanged)=>{
+      if(taskCommentsChanged){
+        console.log("tarefa atualizada: ", this.task )
+        this._taskService.updateTaskComments(this.task.id, this.task.status, this.task.comments)
+      }
+    })
   }
   openEditModal() {
    const dialogRef = this._modalControllerService.openEditTaksModal({
