@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { modalControllerService } from '../../services/modal-controller.service';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -14,11 +14,12 @@ import { ITask } from '../../interfaces/task.interface';
 })
 export class TaskCommentsModal {
   taskCommentsChanged = false;
-  private readonly _modalControllerService = inject(modalControllerService);
   commentControl = new FormControl('', [Validators.required]);
   readonly _task: ITask = inject(DIALOG_DATA);
-
   readonly _dialogRef: DialogRef<boolean> = inject(DialogRef);
+
+  @ViewChild('commentInput') commentInputRef!: ElementRef<HTMLInputElement>;
+
   closeModal() {
     this._dialogRef.close(this.taskCommentsChanged);
   }
@@ -31,10 +32,18 @@ export class TaskCommentsModal {
       description: this.commentControl.value ? this.commentControl.value : '',
     };
 
-    this._task.comments.unshift(newComment)
+    this._task.comments.unshift(newComment);
 
-    this.commentControl.reset()
+    this.commentControl.reset();
 
+    this.taskCommentsChanged = true;
+
+    this.commentInputRef.nativeElement.focus();
+  }
+
+  onRemoveModal(commentId: string) {
+    this._task.comments = this._task.comments.filter((comment) => comment.id !== commentId)
     this.taskCommentsChanged = true
+
   }
 }
